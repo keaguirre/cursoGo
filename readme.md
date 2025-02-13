@@ -161,4 +161,82 @@ func main(){//outer block
 -   float64 = 0.0
 -   string = ""
 -   pointers,functions, interfaces, maps = nil
-            
+
+## Usr input
+```go
+fmt.Scanf("%<format specifier>" (s)", Object_args) //format specifier see table, Object_args = &variable to store the input
+
+func main(){
+    var name string
+    var is_dev bool
+    fmt.Println("Enter your name:  & ru a dev?: (true/false)")
+    fmt.Scanf("%s %t", &name, &is_dev)//%s string, %t boolean, specifiers should match the order of the variables
+    fmt.Printf("Your name is %s and you are a developer: %t", name, is_dev)
+}
+```
+- scanf returns 2 values, count of the number of items successfully written to the variables and an error if any occurs while reading the input
+## Find the type of a variable
+```go
+fmt.Printf("Type: %T Value: %v\n", name, name)
+//or
+import (
+    "fmt"
+    "reflect"
+)
+func main(){
+    name := "kevin"
+    fmt.Println(reflect.TypeOf(name))
+}
+```
+
+## Convertir tipos de datos (Type casting) //convertir un tipo de dato a otro no garantiza que el valor sea el mismo
+```go
+//integer to float
+ var i int = 90
+ var f float64 = float64(i)
+ fmt.Printf("%.2f\n", f)
+
+//float to integer
+var f float64 = 45.89
+var i int = int(f)
+fmt.Printf("%v\n", i)
+```
+### strcpmv package
+- strcpmv package provides functions to convert strings to other data types
+```go
+//Itoa() converts integer to string
+import (
+    "fmt"
+    "strconv"
+)
+func main(){
+    var i int = 42
+    var s string = strconv.Itoa(i)//convertir integer a string
+    fmt.Printf("%q", s)
+}
+//Atoi() converts string to integer
+var s string = "200"
+i, err := strconv.Atoi(s)
+fmt.Printf("%v, %T \n", i, i)
+fmt.Printf("%v, %T", err, err)
+```
+## Constants
+```go
+const [name] [data_type] = [value]
+
+//untyped constant
+//Constants are untyped unless they are explicitly typed
+//allow more flexibility
+```go
+const age = 12
+const h_name, h_age = "kevin", 27
+```
+## typed constant
+- Constants are typed when you explicitly specify the type in the declaration
+- flexibility that comes with untyped constants is lost
+```go
+const string name
+name = "kevin" //error, el por defecto es untyped, por lo que arrojara error de declaracion, ya que pide que se declare el valor al momento de declarar la constante
+const name := "kevin" //esto es incorrecto, ya que no se puede usar := para declarar constantes
+
+```
