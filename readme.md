@@ -238,5 +238,45 @@ const h_name, h_age = "kevin", 27
 const string name
 name = "kevin" //error, el por defecto es untyped, por lo que arrojara error de declaracion, ya que pide que se declare el valor al momento de declarar la constante
 const name := "kevin" //esto es incorrecto, ya que no se puede usar := para declarar constantes
+```
 
+## Operators
+- Comparison operators
+    - ==, !=, <, >, <=, >=
+- Arithmetic operators
+    - +, -, *, /, %, ++, --
+- Assignment operators
+    - =, +=, -=, *=, /=, %=
+- Bitwise operators
+    - &, |, ^, <<, >>
+- Logical operators
+    - &&, ||, !
+
+## Bitwise ops
+- Trabajan a nivel de bit
+- & takes two number as operands and does **and** on every bit of two numbers
+```binary
+12 = 00001100
+25 = 00011001
+&   ---------
+     00001000 = 8 (In decimal)
+```
+```go
+package main
+
+import "fmt"
+func main(){
+  var x, y int = 12, 25
+  z := x & y
+  fmt.Println(z)
+}
+//Result = 8
+```
+
+- | (OR) takes two number as operands and does **or** on every bit of two numbers
+```binary
+12 = 00001100
+25 = 00011001
+|   ---------
+     00011101 = 29 (In decimal)
 ```
