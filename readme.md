@@ -280,3 +280,68 @@ func main(){
 |   ---------
      00011101 = 29 (In decimal)
 ```
+
+
+## If-else statements
+```go
+package main
+import "fmt"
+func main(){
+    var fruit string = "grapes"
+    if fruit == "apple"{
+        fmt.Println("The fruit is apple")
+    }else if fruit == "banana"{
+        fmt.Println("The fruit is banana")
+    }else{
+        fmt.Println("The fruit is not grapes")
+    }
+}
+``` 
+## Switch statement
+```go
+package main
+import "fmt"
+func main(){
+    var i int = 800
+    switch i{
+        case 10:
+            fmt.Println("i is 10")
+        case 100, 200:
+            fmt.Println("i is either 100 or 200")
+        default:
+            fmt.Println("i is neither 0, 100 or 200")
+    }
+}
+```
+- **fallthrough** keyword is in switch-case to force the execution flow to fall through the successive case block, even if the case block doesn't match the expression and until a case block with fallthrough is found or the switch block ends 
+
+## Switch with conditions
+```go
+package main
+import "fmt"
+func main(){
+    var a, b int = 10, 20
+    switch {
+        case a+b == 30:
+            fmt.Println("Equal to 30")
+        case a+b <= 30:
+            fmt.Println("less than or equal to 30")
+        default:
+            fmt.Println("Greater than 30")    
+    }
+}
+```
+
+## Loops
+```go
+for [initialization]; [condition]; [increment/decrement]{
+    //the for loop initialization, condition, and increment/decrement are optional and can be omitted
+}
+//Example:
+package main
+import "fmt"
+func main(){
+    for i:=1; i <= 5; i++{
+        fmt.Println(i*i)
+    }
+}
