@@ -345,3 +345,68 @@ func main(){
         fmt.Println(i*i)
     }
 }
+```
+
+## Arrays
+- Arrays en Go son una coleccion de elementos del mismo tipo y se almacenan en memoria contigua secuencialmente dependiendo del tipo de dato
+- El tamaño de un array es fijo y no puede ser cambiado una vez que se declara
+- El tamaño de un array es parte de su tipo, por lo que [5]int y [10]int son dos tipos diferentes
+- Los arrays en Go son de tipo 0-based, lo que significa que el primer elemento del array tiene un indice de 0
+- Para pasar un array a una funcion por referencia, se debe pasar un puntero al array
+- Los arrays en Go son valores, no punteros, por lo que cuando se pasa un array a una funcion, se pasa una copia del array, no una referencia al array original
+- Para pasar un array a una funcion por referencia, se debe pasar un puntero al array
+- para ocupar un array se debe inicializar con un valor, si no se inicializa el valor por defecto es zero-value
+- si se le pasan 3 elementos a un array de 5, los otros dos elementos seran zero-value
+
+```go
+var [arrayName] [size] [dataType]
+//ex:
+var grades [5] int
+var fruits [3] string
+```
+### Example:
+```go
+package main
+import "fmt"
+func main(){
+
+//array initialization
+    var fruits [2] string = [2]string{"apple", "banana"}
+
+// si se le pasa 5 elementos, el tamaño del array sera 5 en la short declaration
+    marks := [3]int{10,20,30}
+    names := [...] string{"kevin", "jose", "maria"}
+// [...] esto es un ellipsis, que le dice al compilador que infiera el tamaño del array basado en el numero de elementos que se le pasan
+//length of an array
+    fmt.Println(len(fruits))
+    fmt.Println(fruits[0])
+    //podemos asignar un nuevo valor a una posicion del array con: fruits[1] = "grapes"
+    
+}
+```
+### Looping through an array
+```go
+package main
+import "fmt"
+func main(){
+    for i := 0; i < len(marks); i++{
+        fmt.Println(marks[i])
+    }
+    for index, element := range marks{
+        fmt.Println(index,"res=>", element)
+    }
+    //range establece el scope de iteracion hasta la longitud del array y devuelve el indice y el valor del elemento en cada iteracion
+
+}
+```
+
+### Multi-dimensional arrays
+```go
+package main
+import "fmt"
+func main(){
+    arr :=[3][2] int {{2,4}, {4,16}, {8,64}}
+    fmt.Println(arr[2][1]) //res => 64
+
+}
+```
