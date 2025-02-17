@@ -457,5 +457,90 @@ func main(){
     fmt.Println(slice1) //res => [0,0,0,0,0]
     fmt.Println(len(slice1))  //res => 5
     fmt.Println(cap(slice1)) //res => 8
+
+}
+```
+
+- Si se modifica un slice, se modifica el array original, ya que el slice es una referencia al array original y no una copia del array, por eso se edita el valor de la a la que apunta el slice, no el slice en si, por ende, si se modifica el slice, se modifica el array original debido a que se modifica el valor referenciado en la direccion de memoria del array original
+
+```go
+package main
+import "fmt"
+func main(){
+    arr := [5]int{10,20,30,40,50}
+    slice := arr [:3]
+    fmt.Println(arr) //res => [10,20,30,40,50]
+    fmt.Println(slice) //res => [10,20,30]
+    slice[1] = 9000
+    fmt.Println("After modifying the slice, that modifies the array")
+    fmt.Println(arr) //res => [10,9000,30,40,50]
+    fmt.Println(slice) //res => [10,9000,30]
+}
+```
+### Append to a slice
+```go
+package main
+import "fmt"
+func main(){
+    slice = append(slice_name, [values], [values])
+    slice = append(slice, 100, 200)
+    fmt.Println(slice) //res => [10,20,30,100,200]
+    //tambien podemos agregar un slice a otro slice
+    slice = append(slice, another_slice...)//los 3 puntos se ocupan para operaciones variadicas, en este caso para agregar a un slice un elemento que puede tener un numero arbitrario de argumentos
+    arr := [5]int {10,20,30,40,50}
+    slice = append(slice, arr[:2])
+    arr2 := [5]int {5,15, 25, 35, 45}
+    slice_2 := arr_2[:2]
+    new_slice := append(slice, slice_2...)
+    fmt.Println(new_slice) //res => [10,20,30,100,200,5,15]
+}
+```
+### Delete from a slice
+```go
+package main
+import "fmt"
+func main(){
+    slice := [] int{10,20,30,40,50}
+    slice = append(slice[:2], slice[3:]...)
+    fmt.Println(slice) //res => [10,20,40,50]
+}
+```
+### Copy a slice
+- to copy a slice both source and destination slices must be initialized
+- copy function copies elements from a source slice to a destination slice
+- copy function returns the number of elements copied
+- if the length of the source slice is less than the destination slice, the remaining elements in the destination slice are not modified
+- if the length of the source slice is greater than the destination slice, the remaining elements in the source slice are not copied
+- if the source and destination slices overlap, the behavior is undefined
+- if the source and destination slices are the same, the copy function does nothing
+- if the source slice is nil, the copy function does nothing
+- if the destination slice is nil, the copy function allocates a new underlying array and assigns it to the destination slice
+- both source and destination slices must be of the same type
+- if the source and destination slices are of different lengths, the copy function copies the minimum of the two lengths
+
+```go
+package main
+import "fmt"
+func main(){
+    slice := [] int{10,20,30,40,50}
+    slice_copy := make([]int, 3) // ocupamos make para crear un slice con una longitud y capacidad especifica para poder copiar el slice original
+    copy(slice_copy, slice)
+    fmt.Println(slice_copy) //res => [10,20,30]
+}
+```
+
+### Looping through a slice
+```go
+package main
+import "fmt"
+func main(){
+    slice := [] int{10,20,30,40,50}
+    for i, v := range slice{ //index, value
+        fmt.Println(i, v)
+    }
+    //para casos donde no se necesite el indice se puede usar un guion bajo
+    for _, v := range slice{
+        fmt.Println(v)
+    }
 }
 ```
