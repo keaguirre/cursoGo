@@ -410,3 +410,52 @@ func main(){
 
 }
 ```
+
+## Slices
+- Segmento continuo de un array subyacente y proporciona una forma a una secuencia numerada de elementos de ese array
+- Los slices son de longitud variable, a diferencia de los arrays
+- Los slices no tienen un tamaño fijo
+- Los slices son una referencia a un array
+- Los slices son de tipo variable, lo que significa que un slice puede contener elementos de diferentes tipos
+
+- slice tiene 3 propiedades:
+    - puntero a un array
+    - longitud
+    - capacidad
+- la longitud de un slice es la cantidad de elementos que contiene
+- un slice no es necesario que sea apuntado al inicio del array, puede ser cualquier parte del array, asi como si fuese una rebanada de un pastel, por eso se llama slice
+
+- Tiene las funciones len, cap, append, copy
+```go
+var [sliceName] := [] [dataType]{[values]}
+//ejemplo
+slice := [] int{10,20,30}
+fmt.Println(slice)
+
+```
+- slice [start_index] : [end_index] start includes the element at the start index of slice and end excludes the element at the end slice index
+- slice [start_index:] includes all elements from the start index to the end of the slice
+- slice [:end_index] includes all elements from the start of the slice to the end index
+- slice [:] includes all elements of the slice
+- slice [start_index:end_index] includes elements from the start index to the end index-1
+- slice := make([][dataType], [length], [capacity(optional)]) //make function to create a slice
+
+
+### Example
+```go
+package main
+import "fmt"
+func main(){
+    arr := [10]int{10,20,30,40,50,60,70,80,90,100}
+    slice := arr[1:8]
+    fmt.Println(slice) //res => [20,30,40,50,60,70,80]
+    sub_slice := slice[0:3]
+    fmt.Println(sub_slice) //res => [20,30,40]
+
+    //slice length and capacity
+    slice1 := make ([] int, 5, 8)
+    fmt.Println(slice1) //res => [0,0,0,0,0]
+    fmt.Println(len(slice1))  //res => 5
+    fmt.Println(cap(slice1)) //res => 8
+}
+```
