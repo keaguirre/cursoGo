@@ -544,3 +544,139 @@ func main(){
     }
 }
 ```
+
+## Maps
+- Unordered collection of key-value pairs
+- Maps are used to look up a value by its associated key
+- Maps are reference types
+- Maps are dynamic, they grow or shrink as needed
+- Maps are not thread-safe
+- Maps are used to represent a collection of elements where each element is stored as a key-value pair
+- provides efficient get, adds, and deletes
+
+### Declaration
+```go
+var [map_name] map [key_data_type] value_data_type
+```
+#### ejemplo
+
+```go
+package main
+import "fmt"
+func main(){
+    var my_map map [string] int
+// in maps the zero value is nil and it does not contain any key pairs, just values that are zero-value
+}
+```
+```go
+package main
+import "fmt"
+func main(){
+    //map declaration and initialization
+    //<map_name> := map[<key_data_type>]<value_data_type>{<key>:<value>, <key>:<value>}
+    fst_map := map[string]string{"en": "English", "es": "Spanish", "fr": "French"}
+    codes := make(map[string]int)
+    fmt.Println(fst_map["en"]) //res => english
+    fmt.Println(fst_map["es"]) //res => espanol
+    fmt.Println(fst_map["fr"]) //res => frances
+    //-------------------------------------------
+    codes := map[string]int{"en": 1,"es": 2,"fr": 3,}
+    value, found := codes["en"]
+    fmt.Println(found, value) //res => true, 1
+    value, found = codes["de"]
+    fmt.Println(found, value) //res => false, 0
+}
+
+```
+
+### Adding elements to a map
+```go
+package main
+import "fmt"
+func main(){
+    codes := map[string]string {"en": "English", "fr": "French", "hi": "Hindi" }
+    codes["it"] = "Italian"
+    fmt.Println(codes)
+    //res= map[en:English fr:French hi:Hindi it:Italian]
+}
+```
+
+### Update key-value pairs
+```go
+package main
+import "fmt"
+func main(){
+    codes := map [string] string {"en": "English", "fr": "French", "hi": "Hindi"}
+    codes["en"] = "English Language"
+    fmt.Println(codes)
+    //res => map[en:English Language fr:French hi:Hindi]
+}
+```
+
+### Delete key-value pairs
+```go
+package main
+import "fmt"
+func main(){
+    codes := map [string] string {"en": "English", "fr": "French", "hi": "Hindi"}
+    fmt.Println("before",codes)
+    delete(codes, "en")
+    fmt.Println("after", codes)
+    //res => before map[en:English fr:French hi:Hindi]
+    //res => after map[fr:French hi:Hindi]
+}
+```
+
+### Iterating over a map
+```go
+package main
+import "fmt"
+func main(){
+    codes := map [string] string {"en": "English", "fr": "French", "hi": "Hindi"}
+    for key, value := range codes{fmt.Println(kevin, "->", value)}
+    //res => en -> English
+    //res => fr -> French
+    //res => hi -> Hindi
+}
+
+```
+### Truncate a map
+```go
+package main
+import "fmt"
+func main(){
+    codes := map [string] string {"en": "English", "fr": "French", "hi": "Hindi"}
+    for key, value := range codes{
+        delete(codes, key)
+    }
+    fmt.Println(codes)
+}
+```
+#### Second alternavite
+```go
+package main
+import "fmt"
+func main(){
+    codes := map [string] string {"en": "English", "fr": "French", "hi": "Hindi"}
+    codes = make(map[string]string)
+    fmt.Println(codes)
+    //res => map[]
+    //this will create a new map with no key-value pairs and the old map will be garbage collected
+}
+```
+
+### Nil in Go
+- `nil` is a predeclared identifier representing the zero value for pointers, channels, functions, interfaces, maps, and slices.
+- It indicates that the variable does not point to any valid memory location or value.
+- For example, a map that is declared but not initialized is `nil`.
+
+```go
+var myMap map[string]int
+fmt.Println(myMap == nil) // true
+```
+- Attempting to add elements to a `nil` map will cause a runtime panic. Always initialize maps using `make` before adding elements.
+
+```go
+myMap = make(map[string]int)
+myMap["key"] = 42
+```
