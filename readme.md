@@ -680,3 +680,137 @@ fmt.Println(myMap == nil) // true
 myMap = make(map[string]int)
 myMap["key"] = 42
 ```
+## Functions syntax
+```go
+func [function_name]([parameters]) [return_type]{
+    //function body
+}
+```
+- Parameters are optional
+- Return type is optional
+- Multiple return values are supported
+- Functions are first-class citizens in Go
+- Functions can be passed as arguments to other functions
+- Functions can be returned from other functions
+- Functions can be assigned to variables
+- Functions can be used as types
+
+example
+```go
+func add_numbers(a int, b int) int{
+    return a + b //or sum := a + b return sum
+}
+var res int = add_numbers(10, 20)
+
+//multiple return values
+func swap(a, b int) (int, int){
+    return b, a
+}
+var x, y int = swap(10, 20)
+
+func operation(a, b int) (sum int, diff int){
+    sum = a + b
+    diff = a - b
+    return
+    // podemos definir variables de retorno en la firma de la funcion
+}
+
+```
+### Variadic functions
+- Variadic functions are functions that can accept a variable number of arguments
+- The `...` operator is used to define a variadic function
+- The `...` operator is used to pass a variable number of arguments to a variadic function
+```go
+func [func_name] (param-1 type, param-2 type, ...type) [return_type]{
+    //function body
+}
+
+func sum_numbers(nums ...int) int{
+    sum := 0
+    for _, num := range nums{
+        sum += num
+    }
+    return sum
+}
+
+func f() (int, int){
+    return 5, 6
+}
+
+v, _ := f()//ignorar el segundo valor de retorno, ya que retorna 2 valores
+fmt.Println(v)
+
+```
+
+### Anonymous functions
+- Anonymous functions are functions without a name
+- Anonymous functions are defined using the `func` keyword followed by the function signature
+- Anonymous functions can be assigned to variables
+- Anonymous functions can be passed as arguments to other functions
+- Anonymous functions can be returned from other functions
+- Anonymous functions can be used as types
+- Anonymous functions can access variables declared in the outer scope
+- Anonymous functions can be immediately invoked
+- Anonymous functions can be used to create closures
+- Anonymous functions can be used to create goroutines
+- Anonymous functions can be used to create function literals
+
+```go
+package main
+import "fmt"
+func main(){
+    x := func (1 int, b int) int {
+        return 1*b
+    }
+    fmt.Println(fmt.Printf("%T", x)) //res => func(int, int) int
+}
+```
+
+## Higher-order functions
+- Higher-order functions are functions that take other functions as arguments or return functions as their results
+- Higher-order functions are used to abstract over actions, not just values
+- Higher-order functions are used to create new functions by combining existing functions
+- Higher-order functions are used to create functions that operate on other functions
+- Higher-order functions are used to create functions that return other functions
+- Higher-order functions are used to create functions that take other functions as arguments
+
+```go
+package main
+import "fmt"
+func main(){
+    add := func (a, b int) int{
+        return a + b
+    }
+    fmt.Println(operate(add, 10, 20)) //res => 30
+}
+func operate(f func(int, int) int, a, b int) int{
+    return f(a, b)
+}
+```
+
+## Defer statement
+- The `defer` statement is used to delay the execution of a function until the surrounding function returns
+- The deferred function is executed in the Last In First Out (LIFO) order
+- Deferred functions are executed even if the surrounding function panics
+- Deferred functions are executed even if the surrounding function returns normally
+```go
+package main
+import "fmt"
+func printName(str string) {
+    fmt.Println(str)
+}
+
+func printRollNo(rno int) {
+    fmt.Println(rno)
+}
+
+func printAddress(adr string) {
+    fmt.Println(adr)
+}
+
+func main() {
+    printName("Joe")
+    defer printRollNo(23)
+    printAddress("street-32")
+}
+```
