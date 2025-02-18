@@ -814,3 +814,102 @@ func main() {
     printAddress("street-32")
 }
 ```
+
+## Pointers
+- A pointer is a variable that stores the memory address of another variable
+- A pointer is a reference to a memory location
+- A pointer is a variable that stores the address of another variable
+- A pointer is a variable that stores the memory address of another variable
+- zero-value of a pointer is `nil`
+
+```go
+package main
+import "fmt"
+func main(){
+    var x int = 10
+    var p *int = &x
+    fmt.Println(x, p, *p)
+    //res => 10, 0xc0000b6010, 10
+    //declarar un puntero se hace con el operador &, y para acceder al valor de un puntero se hace con el operador *
+    var [pointer_name] *[data_type] = & [variable_name]
+    var ptr *int = &x
+    var y int = *ptr
+    pointer_name := &variable_name
+
+}   
+```
+- `&` ("address")operator is used to get the address of a variable
+- `*` ("deference")operator is used to get the value of a pointer
+
+```go
+package main
+import "fmt"
+func main() {
+    s := "hello"
+
+    var b *string = &s
+    fmt.Println(b)
+
+    var a = &s
+    fmt.Println(a)
+
+    c := &s
+    fmt.Println(c)
+}
+```
+
+### Deferencing a pointer
+- Dereferencing a pointer means getting the value that the pointer points to
+- Dereferencing a pointer is done using the `*` operator
+- Dereferencing a pointer returns the value stored at the memory address the pointer points to
+- Dereferencing a pointer is used to access the value stored at the memory address the pointer points to
+
+```go
+package main
+import "fmt"    
+func main(){
+    var x int = 10
+    var p *int = &x
+    fmt.Println(x, p, *p)
+    //res => 10, 0xc0000b6010, 10
+}
+```
+
+### Passing by value
+- By default, Go uses pass by value
+- When a variable is passed by value, a copy of the variable is passed to the function
+- The function receives a copy of the variable, not the original variable
+- Any changes made to the variable inside the function do not affect the original variable
+- When a variable is passed by value, the function receives a copy of the variable, not the original variable
+
+```go
+package main
+import "fmt"
+func main(){
+    x := 10
+    changeValue(x)
+    fmt.Println(x)
+}
+func changeValue(a int){
+    a = 20
+}
+```
+
+### Passing by reference in functions
+- To pass a variable by reference, a pointer to the variable is passed to the function
+- When a variable is passed by reference, the function receives the memory address of the variable
+- The function can then modify the value stored at the memory address
+- When a variable is passed by reference, the function receives the memory address of the variable, not a copy of the variable
+
+```go   
+package main
+import "fmt"
+func main(){
+    x := 10
+    changeValue(&x)
+    fmt.Println(x)
+}
+func changeValue(a *int){
+    *a = 20
+}
+```
